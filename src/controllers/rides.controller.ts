@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 
 import { Rides } from '../models/ride.model';
-import IRidePoint from '../services/rides/IRidePoint';
 
 export default class RidesController {
   private createRide = async (rideSchema: any) => {

@@ -1,4 +1,4 @@
-import { Schema, Model, model, Document, SchemaType } from 'mongoose';
+import { Schema, Model, model, Document } from 'mongoose';
 import { ILocation, ILocationSchemaType} from '../services/location/ILocation';
 
 export interface IRide extends Document {
