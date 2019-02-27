@@ -10,7 +10,7 @@ const getMongoConnectionString = () => {
 		case 'production':
 			return 'mongodb://hZsBjny88GbwJyaw:67C2WTf748R2zeuDkJTn@127.0.0.1:27017/pickupme?authSource=admin';
 		default:
-			return 'mongodb://hZsBjny88GbwJyaw:67C2WTf748R2zeuDkJTn@165.227.157.101:27017/pickupme?authSource=admin';
+			return 'mongodb://hZsBjny88GbwJyaw:67C2WTf748R2zeuDkJTn@127.0.0.1:27017/pickupme?authSource=admin';
 	}
 }
 
