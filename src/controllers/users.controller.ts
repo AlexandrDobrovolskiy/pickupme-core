@@ -13,12 +13,6 @@ export default class UsersController {
   }
 
   public loginWithTelegram = async (req: Request, res: Response): Promise<void> => {
-    const validation = validationResult(req).mapped();
-    const error = validation._error;
-    if (error) {
-      res.json(error);
-    }
-
     const { phone, name, telegramId } = req.body;
     const existed = await Users.findOne({ phone }).exec();
 
