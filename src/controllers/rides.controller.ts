@@ -1,16 +1,21 @@
 import { Request, Response } from 'express';
-import { validationResult } from 'express-validator/check';
+
+import { Rides } from '../models/ride.model';
+import IRidePoint from '../services/rides/IRidePoint';
 
 export default class RidesController {
-  public create(req: Request, res: Response): void {
-    const error = validationResult(req).mapped();
+  private createRide = async (rideSchema: any) => {
+    const ride = await Rides.create(rideSchema);
 
-    if (error) {
-      res.json(error);
-      return;
-    }
+    return ride;
+  }
 
-    res.json({ msg: 'Hello!' });
+  public create = async (req: Request, res: Response): Promise<void> => {
+    const { driverId, departure, arival, date, seats, price } = req.body;
+
+    const ride = await this.createRide({ driverId, departure, arival, date, seats, price });
+
+    res.json(ride);
   }
 }
 
