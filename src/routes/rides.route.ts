@@ -11,5 +11,10 @@ export default class UsersRoute {
       validateWith(authValidation, validation.create),
       ridesController.create
     );
+
+    app.route("/v1/rides").get(
+      validateWith(authValidation, /* unique validator */),
+      // controller
+    )
 	}
 }
