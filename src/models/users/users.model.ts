@@ -7,7 +7,10 @@ import { UserSchema } from './users.schema';
 
 export class UsersModel {
   private static collectionName: string = 'Users';
-  private static _model: Model<User> = model<User>('User', UserSchema);
+  private static _model: Model<User> = model<User>(
+    UsersModel.collectionName,
+    UserSchema
+  );
 
   public static async create(phone: string, name: string, telegramId: string) {
     const token: string = jwt.sign({ phone }, 'secret');
