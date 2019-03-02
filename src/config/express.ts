@@ -15,7 +15,8 @@ export default function (db) {
 
     if (config.useMongo) {
         mongoose.connect(config.mongodb, {
-            promiseLibrary: global.Promise
+            promiseLibrary: global.Promise,
+            useNewUrlParser: true,
         }).catch(() => { console.log("Error connecting to mongos"); });
     }
 

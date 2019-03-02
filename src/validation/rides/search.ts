@@ -2,8 +2,7 @@ import { buildCheckFunction, oneOf } from 'express-validator/check';
 
 const checkBody = buildCheckFunction(['body']);
 
-export const create = [
-  checkBody('driverId', 'driverId is invalid or not provided.').isString().isLength({ min: 5 }),
+export const search = [
   checkBody('date', 'date is invalid or not provided.').custom((date) => { 
     if (!date) {
       return Promise.reject(); 
@@ -32,5 +31,4 @@ export const create = [
 
     return Promise.resolve(seats);
   }),
-  checkBody('price', 'price is invalid or not provided.').isNumeric()
 ]

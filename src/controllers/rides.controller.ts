@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
 import { RidesModel } from '../models/rides';
+import { ResponseUtils } from '../utils/response';
 
 export default class RidesController {
   public create = async (req: Request, res: Response): Promise<void> => {
@@ -8,7 +9,11 @@ export default class RidesController {
 
     const ride = await RidesModel.create(driverId, departure, arival, date, seats, price);
 
-    res.json(ride);
+    ResponseUtils.json(res, true, ride);
+  }
+
+  public search = async (req: Request, res: Response): Promise<void> => {
+    const { arival, departure } = req.body;
   }
 }
 
