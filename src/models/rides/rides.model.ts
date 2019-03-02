@@ -6,7 +6,7 @@ import { RideSchema } from "./rides.schema";
 import { Location } from "../location";
 
 export class RidesModel {
-  private static _collectionName: string = "Ride";
+  private static _collectionName: string = "Rides";
   private static _model: Model<Ride> = model<Ride>(
     RidesModel._collectionName,
     RideSchema
