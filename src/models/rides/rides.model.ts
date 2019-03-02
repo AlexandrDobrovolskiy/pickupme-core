@@ -4,6 +4,8 @@ import { Ride } from "./ride";
 import { RideSchema } from "./rides.schema";
 
 import { Location } from "../location";
+import { RidesQueries } from "./rides.queries";
+import { DEFAULT_SEARCH_INTERVAL } from "./constants";
 
 export class RidesModel {
   private static _collectionName: string = "Rides";
@@ -17,18 +19,22 @@ export class RidesModel {
     date: Date,
     price: number,
     seats: number,
-    arival: Location,
+    arrival: Location,
     departure: Location
   ) {
     const ride = await this._model.create({
-      driverId, date, price, seats, arival, departure
+      driverId, date, price, seats, arrival, departure
     });
 
-    return ride;
+    return ride.toJSON();
   }
 
-  public static async search(location: Location) {
-    // @TODO: implement this method 
+  public static async search(departure: Location, arrival: Location, date: Date) {
+    const rides = await this._model.find(
+      RidesQueries.find(new Date(date), DEFAULT_SEARCH_INTERVAL, departure, arrival)
+    ).exec();
+
+    return rides;
   }
 
   public static async get() {
