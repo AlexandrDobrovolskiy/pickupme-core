@@ -5,15 +5,19 @@ import { ResponseUtils } from '../utils/response';
 
 export default class RidesController {
   public create = async (req: Request, res: Response): Promise<void> => {
-    const { driverId, departure, arival, date, seats, price } = req.body;
+    const { driverId, departure, arrival, date, seats, price } = req.body;
 
-    const ride = await RidesModel.create(driverId, departure, arival, date, seats, price);
+    const ride = await RidesModel.create(driverId, date, price, seats, arrival, departure);
 
     ResponseUtils.json(res, true, ride);
   }
 
   public search = async (req: Request, res: Response): Promise<void> => {
-    const { arival, departure } = req.body;
+    const { arrival, departure, date } = req.body;
+
+    const nearbyRides = await RidesModel.search(date, departure, arrival);
+
+    ResponseUtils.json(res, true, { rides: nearbyRides })
   }
 }
 

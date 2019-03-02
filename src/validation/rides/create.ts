@@ -11,12 +11,12 @@ export const create = [
 
     return Promise.resolve(date);
   }),
-  checkBody('arival', 'arival is invalid or not provided.').custom((arival) => { 
-    if (!arival) {
+  checkBody('arrival', 'arrival is invalid or not provided.').custom((arrival) => { 
+    if (!arrival) {
       return Promise.reject(); 
     }
 
-    return Promise.resolve(arival);
+    return Promise.resolve(arrival);
   }),
   checkBody('departure', 'departure is invalid or not provided.').custom((departure) => { 
     if (!departure) {

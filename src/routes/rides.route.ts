@@ -3,12 +3,12 @@ import { ridesController } from "../controllers/rides.controller";
 
 import { validateWith } from '../validation';
 import { authValidation } from '../validation/auth';
-import { create as createValidation } from '../validation/rides';
+import { create, search } from '../validation/rides';
 
 export default class UsersRoute {
 	constructor(app: Express) {
     app.route("/v1/rides").post(
-      validateWith(authValidation, createValidation),
+      validateWith(authValidation, create),
       ridesController.create
     );
 
@@ -22,9 +22,9 @@ export default class UsersRoute {
     //   // controller
     // );
 
-    // app.route("/v1/rides/search").get(
-    //   validateWith(authValidation, /* unique validator */),
-    //   // controller
-    // );
+    app.route("/v1/rides/search").post(
+      validateWith(authValidation, search),
+      ridesController.search
+    );
 	}
 }
