@@ -29,7 +29,8 @@ export class RidesModel {
     return ride.toJSON();
   }
 
-  public static async search(departure: Location, arrival: Location, date: Date) {
+  public static async search(date: Date, departure: Location, arrival: Location) {
+
     const rides = await this._model.find(
       RidesQueries.find(new Date(date), DEFAULT_SEARCH_INTERVAL, departure, arrival)
     ).exec();

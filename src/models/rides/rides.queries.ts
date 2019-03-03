@@ -5,8 +5,8 @@ export class RidesQueries {
   public static find(
     date: Date,
     interval: number,
+    departure: Location,
     arrival: Location,
-    departure: Location
   ): any {
     var dateNumber = new Date(date).getTime();
     var from = new Date(dateNumber - interval);
@@ -17,9 +17,10 @@ export class RidesQueries {
     }
 
     return {
-      date: {
-        $or:[{ $gte: from }, { $lte: to }],
-      },
+      $or: [
+        { date: { $gte: from } },
+        { date: { $lte: to } },
+      ],
       departure: {
         $geoWithin: { $center: [departure.coordinates, DEPARTURE_RADIUS], }
       },
