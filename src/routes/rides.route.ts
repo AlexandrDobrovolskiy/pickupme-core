@@ -1,15 +1,16 @@
 import { Express } from "express";
 import { ridesController } from "../controllers/rides.controller";
 
-import { validateWith } from '../validation';
 import { authValidation } from '../validation/auth';
 import { create, search } from '../validation/rides';
+import { useValidation } from "../utils/validation/use-validation";
+import { useController } from "../utils/controllers/use-controller";
 
 export default class UsersRoute {
 	constructor(app: Express) {
     app.route("/v1/rides").post(
-      validateWith(authValidation, create),
-      ridesController.create
+      useValidation(authValidation, create),
+      useController(ridesController.create),
     );
 
     // app.route("/v1/rides/driver").get(
@@ -23,8 +24,8 @@ export default class UsersRoute {
     // );
 
     app.route("/v1/rides/search").post(
-      validateWith(authValidation, search),
-      ridesController.search
+      useValidation(authValidation, search),
+      useController(ridesController.search),
     );
 	}
 }

@@ -3,7 +3,7 @@ import { validationResult } from 'express-validator/check';
 
 import { ResponseUtils, createError, StatusCodes } from '../../utils/response';
 
-export const validate = (req: Request, res: Response, next: Function) => {
+const validate = (req: Request, res: Response, next: Function) => {
   const errors = validationResult(req).mapped();
 
   if (Object.keys(errors).length > 0) {
@@ -12,4 +12,8 @@ export const validate = (req: Request, res: Response, next: Function) => {
   }
 
   next();
+}
+
+export const useValidation = (...validators) => {
+  return [...validators, validate];
 }
