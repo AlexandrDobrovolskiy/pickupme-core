@@ -38,8 +38,12 @@ export class RidesModel {
     return rides;
   }
 
-  public static async get() {
-    // @TODO: implement this method
+  public static async getDriver(driverId: string) {
+    return await this._model.find({ driverId }).exec();
+  }
+
+  public static async getPassanger(passangerId: string) {
+    return await this._model.find({ passangers: { $elemMatch: passangerId } }).exec();
   }
 
   public static async moveToHistory(rideId: number) {
