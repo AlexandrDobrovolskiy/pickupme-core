@@ -30,7 +30,7 @@ export class RidesModel {
   }
 
   public static async search(date: Date, departure: Location, arrival: Location) {
-    console.log('model ', departure.coordinates, arrival.coordinates);
+
     const rides = await this._model.find(
       RidesQueries.find(new Date(date), DEFAULT_SEARCH_INTERVAL, departure, arrival)
     ).exec();
