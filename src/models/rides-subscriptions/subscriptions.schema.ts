@@ -2,8 +2,8 @@ import { Schema } from 'mongoose';
 
 import { LocationSchema } from '../location';
 
-export var RideSchema: Schema = new Schema({
-  driverId: {
+export var SearchSubscriptionSchema: Schema = new Schema({
+  subscriberId: {
     type: Schema.Types.ObjectId,
     required: true
   },
@@ -23,13 +23,9 @@ export var RideSchema: Schema = new Schema({
     type: LocationSchema,
     required: true,
   },
-  price: {
-    type: Schema.Types.Number,
-    required: true
-  },
-  passengers: {
-    type: Schema.Types.Array,
+  canceled: {
+    type: Schema.Types.Boolean,
     required: false,
-    default: []
-  }
+    default: false,
+  },
 });

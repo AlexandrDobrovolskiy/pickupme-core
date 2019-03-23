@@ -1,7 +1,7 @@
 import { Location } from "models/location";
 import { DEPARTURE_RADIUS, ARIVAL_RADIUS } from '../location';
 
-export class RidesQueries {
+export class SubscriptionQueries {
   public static find(
     date: Date,
     seats: number,

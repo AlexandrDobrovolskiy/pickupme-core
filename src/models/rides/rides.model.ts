@@ -7,6 +7,9 @@ import { Location } from "../location";
 import { RidesQueries } from "./rides.queries";
 import { DEFAULT_SEARCH_INTERVAL } from "./constants";
 
+import { UsersModel } from "../../models/users";
+import { Contact } from "../../models/contact";
+
 export class RidesModel {
   private static _collectionName: string = "Rides";
   private static _model: Model<Ride> = model<Ride>(
@@ -22,17 +25,26 @@ export class RidesModel {
     arrival: Location,
     departure: Location
   ) {
+    const driver = await UsersModel.findOne(driverId);
+
+    if (!driver) {
+      return null;
+    }
+
+    const { name, phone } = driver;
+    const driverContact = { name, phone } as Contact;
+
     const ride = await this._model.create({
-      driverId, date, price, seats, arrival, departure
+      driverContact, date, price, seats, arrival, departure
     });
 
     return ride.toJSON();
   }
 
-  public static async search(date: Date, departure: Location, arrival: Location) {
+  public static async search(date: Date, seats: number, departure: Location, arrival: Location) {
 
     const rides = await this._model.find(
-      RidesQueries.find(new Date(date), DEFAULT_SEARCH_INTERVAL, departure, arrival)
+      RidesQueries.find(new Date(date), seats, DEFAULT_SEARCH_INTERVAL, departure, arrival)
     ).exec();
 
     return rides;
