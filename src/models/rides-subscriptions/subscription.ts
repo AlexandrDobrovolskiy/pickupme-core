@@ -1,5 +1,5 @@
 import { Document } from "mongoose";
-import { Location } from "models/location";
+import { Location } from "../location";
 
 export interface Subscription extends Document {
   date: Date;

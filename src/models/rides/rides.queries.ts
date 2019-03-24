@@ -1,4 +1,4 @@
-import { Location } from "models/location";
+import { Location } from "../location";
 import { DEPARTURE_RADIUS, ARIVAL_RADIUS } from '../location';
 
 export class RidesQueries {

@@ -1,5 +1,4 @@
-import { Location } from "models/location";
-import { DEPARTURE_RADIUS, ARIVAL_RADIUS } from '../location';
+import { DEPARTURE_RADIUS, ARIVAL_RADIUS, Location } from '../location';
 
 export class SubscriptionQueries {
   public static find(
