@@ -35,7 +35,7 @@ export class RidesModel {
     const driverContact = { name, phone } as Contact;
 
     const ride = await this._model.create({
-      driverContact, date, price, seats, arrival, departure
+      driverId, driverContact, date, price, seats, arrival, departure
     });
 
     return ride.toJSON();

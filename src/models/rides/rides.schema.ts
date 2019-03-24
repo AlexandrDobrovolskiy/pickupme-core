@@ -1,10 +1,15 @@
 import { Schema } from 'mongoose';
 
 import { LocationSchema } from '../location';
+import { ContactSchema } from '../contact';
 
 export var RideSchema: Schema = new Schema({
   driverId: {
     type: Schema.Types.ObjectId,
+    required: true,
+  },
+  driverContact: {
+    type: ContactSchema,
     required: true
   },
   date: {
