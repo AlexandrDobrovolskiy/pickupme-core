@@ -25,7 +25,7 @@ export class RidesModel {
     arrival: Location,
     departure: Location
   ) {
-    const driver = await UsersModel.findOne(driverId);
+    const driver = await UsersModel.findOne({ _id: driverId });
 
     if (!driver) {
       return null;

@@ -22,7 +22,7 @@ export class SubscriptionQueries {
         { date: { $gte: from } },
         { date: { $lte: to } },
       ],
-      seats: { $gte: seats },
+      seats: { $lte: seats },
       departure: {
         $geoWithin: { $center: [departure.coordinates, DEPARTURE_RADIUS], }
       },

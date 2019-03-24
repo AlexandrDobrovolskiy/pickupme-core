@@ -10,7 +10,7 @@ export class TelegramNotifier {
       first_name="Lol"`;
   }
 
-  private static async notifyOne(ride: Ride, subscriber: any): Promise<Response> {
+  private static notifyOne(ride: Ride, subscriber: any): Promise<Response> {
     const { phone, telegramId } = subscriber;
 
     return fetch(this.composeURL(phone, telegramId));

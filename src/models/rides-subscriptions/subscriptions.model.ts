@@ -26,7 +26,7 @@ export class SubscriptionsModel {
     const expires = new Date(date.getTime() + SubscriptionsModel.EXPIRE_DELAY);
     const subscription = await this._model.create([{ date, seats, arrival, departure, subscriberId }], { expires });
 
-    return subscription.toJSON();
+    return subscription;
   }
 
   public static async findNearby(
@@ -38,8 +38,8 @@ export class SubscriptionsModel {
     const subscriptions = await this._model.find(
       SubscriptionQueries.find(date, seats, DEFAULT_SEARCH_INTERVAL, departure, arrival)
     ).exec();
-
-    return subscriptions;
+    
+    return subscriptions.map(sub => sub._id);
   }
 
   public static async cancel(subscriptionId: string) {
