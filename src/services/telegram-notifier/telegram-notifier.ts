@@ -6,7 +6,7 @@ export class TelegramNotifier {
 
   private static composeUrls(phone: string, telegramId: string, name: string, ride: Ride): string[] {
     const contact = `${this.NOTIFY_URL}/sendContact?chat_id=${telegramId}&phone_number=${phone}&first_name=${encodeURI(name)}`;
-    const message = `${this.NOTIFY_URL}/sendMessage?chat_id=${telegramId}&text=${encodeURI(`Информация про поездку:\n Когда: ${new Date(ride.date).toLocaleDateString('uk-UA')},\n Сколько: ${ride.price} UAH.\n Мест в машине: ${ride.seats}.`)}`;
+    const message = `${this.NOTIFY_URL}/sendMessage?chat_id=${telegramId}&text=${encodeURI(`Информация про поездку:\nКогда: ${new Date(ride.date).toLocaleDateString('uk-UA')},\nСтоимость поездки: ${ride.price} UAH.\n Мест в машине: ${ride.seats}.`)}`;
 
     return [contact, message];
   }
