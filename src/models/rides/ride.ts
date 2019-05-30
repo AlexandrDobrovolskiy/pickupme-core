@@ -4,7 +4,7 @@ import { Location } from '../location';
 import { Contact } from '../../models/contact';
 
 export interface Ride extends Document {
-  driver: Contact;
+  driverContact: Contact;
   seats: number;
   price: number;
   date: Date;
