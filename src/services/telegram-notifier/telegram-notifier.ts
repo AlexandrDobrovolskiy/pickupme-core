@@ -7,7 +7,7 @@ export class TelegramNotifier {
   private static composeUrls(telegramId: string, ride: Ride): string[] {
     const { driverContact } = ride;
     const contact = `${this.NOTIFY_URL}/sendContact?chat_id=${telegramId}&phone_number=${driverContact.phone}&first_name=${encodeURI(driverContact.name)}`;
-    const message = `${this.NOTIFY_URL}/sendMessage?chat_id=${telegramId}&text=${encodeURI(`🚘 Поездка найдена 🚘 \n\n⏱ Когда: ${new Date(ride.date).toLocaleDateString('uk-UA')} в ${new Date(ride.date).toLocaleTimeString('uk-UA').split(':').slice(0, 2)},\n💵 Стоимость поездки: ${ride.price} UAH.\n💺 Мест в машине: ${ride.seats}.`)}`;
+    const message = `${this.NOTIFY_URL}/sendMessage?chat_id=${telegramId}&text=${encodeURI(`🚘 Поездка найдена 🚘 \n\n⏱ Когда: ${new Date(ride.date).toLocaleDateString('uk-UA')} в ${new Date(ride.date).toLocaleTimeString('uk-UA').split(':').slice(0, 2).reduce((a,b) => `${a}:${b}`, '')},\n💵 Стоимость поездки: ${ride.price} UAH.\n💺 Мест в машине: ${ride.seats}.`)}`;
 
     return [contact, message];
   }
