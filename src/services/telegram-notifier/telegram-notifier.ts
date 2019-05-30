@@ -14,8 +14,7 @@ export class TelegramNotifier {
   private static notifyOne(ride: Ride, subscriber: any): Promise<Response> {
     const { phone, telegramId, name } = subscriber;
 
-    // @TODO: notify about ride
-    const [contactUrl, messageUrl] = this.composeUrls(phone, telegramId, name, ride);
+    const [contactUrl, messageUrl] = this.composeUrls(ride.driver.phone, telegramId, name, ride);
     return fetch(contactUrl)
       .then(() => fetch(messageUrl));
   }
