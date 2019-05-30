@@ -1,4 +1,4 @@
 const DEGREE_TO_KM = 111.23551915;
 
-export const ARIVAL_RADIUS    = 2 / DEGREE_TO_KM;
+export const ARRIVAL_RADIUS = 2 / DEGREE_TO_KM;
 export const DEPARTURE_RADIUS = 2 / DEGREE_TO_KM;

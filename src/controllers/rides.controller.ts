@@ -13,7 +13,8 @@ export default class RidesController {
     const ride = await RidesModel.create(driverId, date, price, seats, arrival, departure);
     const subs = await SubscriptionsModel.findNearby(date, seats, arrival, departure);
 
-    const telegramIds = await UsersModel.getTelegramIds(subs);
+    const telegramIds = await UsersModel.findSubscribersByIdArray(subs);
+
     TelegramNotifier.notify(ride, telegramIds);
 
     ResponseUtils.json(res, true, ride);

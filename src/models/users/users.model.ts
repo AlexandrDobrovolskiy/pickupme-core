@@ -23,9 +23,13 @@ export class UsersModel {
     return await this._model.findOne(conditions).exec();
   }
 
-  public static async getTelegramIds(userIds: Array<string>): Promise<string[]> {
+  public static async findSubscribersByIdArray(userIds: Array<string>): Promise<object[]> {
     const users =  await this._model.find({ _id: { $in: userIds } });
 
-    return users.map(user => user.telegramId);
+    return users.map(user => ({
+      telegramId: user.telegramId,
+      phone: user.phone,
+      name: user.name,
+    }));
   }
 }

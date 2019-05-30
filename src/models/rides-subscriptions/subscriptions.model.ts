@@ -39,7 +39,7 @@ export class SubscriptionsModel {
       SubscriptionQueries.find(date, seats, DEFAULT_SEARCH_INTERVAL, departure, arrival)
     ).exec();
     
-    return subscriptions.map(sub => sub._id).filter(sub => !sub.canceled);
+    return subscriptions.filter(sub => !sub.canceled).map(sub => sub.subscriberId);
   }
 
   public static async cancel(subscriptionId: string) {

@@ -1,5 +1,5 @@
 import { Location } from "../location";
-import { DEPARTURE_RADIUS, ARIVAL_RADIUS } from '../location';
+import { DEPARTURE_RADIUS, ARRIVAL_RADIUS } from '../location';
 
 export class RidesQueries {
   public static find(
@@ -27,7 +27,7 @@ export class RidesQueries {
         $geoWithin: { $center: [departure.coordinates, DEPARTURE_RADIUS], }
       },
       arrival: {
-        $geoWithin: { $center: [arrival.coordinates, ARIVAL_RADIUS], }
+        $geoWithin: { $center: [arrival.coordinates, ARRIVAL_RADIUS], }
       },
     }
   }

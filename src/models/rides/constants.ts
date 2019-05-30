@@ -1,1 +1,1 @@
-export const DEFAULT_SEARCH_INTERVAL = 30 * 60 * 1000; // 30 min
+export const DEFAULT_SEARCH_INTERVAL = 60 * 60 * 1000; // 30 min
