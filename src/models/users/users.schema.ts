@@ -1,5 +1,13 @@
 import { Schema } from 'mongoose';
 
+const AuthenticationSchema: Schema = new Schema({
+  firebase: {
+    type: Schema.Types.String,
+    required: false,
+    default: '',
+  }
+});
+
 export const UserSchema: Schema = new Schema({
   name: {
     type: Schema.Types.String,
@@ -14,8 +22,8 @@ export const UserSchema: Schema = new Schema({
 		required: false,
 		default: ''
   },
-  token : {
-    type: Schema.Types.String,
-    required: true
-  }
+  authentication: {
+    type: AuthenticationSchema,
+    required: false,
+  },
 });

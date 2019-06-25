@@ -13,10 +13,22 @@ export class UsersModel {
   );
 
   public static async create(phone: string, name: string, telegramId: string) {
-    const token: string = jwt.sign({ phone }, 'secret');
-    const user = await this._model.create({ phone, name, telegramId, token });
+    const user = await this._model.create({ phone, name, telegramId });
 
     return user;
+  }
+
+  public static async assignFirebaseToken(_id: string, firebaseId: string) {
+    const token = jwt.sign(firebaseId, 'secret');
+
+    return await this._model.updateOne({ _id }, { authentication: { firebase: token } }).exec();
+  }
+
+  public static async createWithFirebase(phone: string, name: string, firebaseId: string) {
+    const user = await UsersModel.create(phone, name, '');
+    await UsersModel.assignFirebaseToken(user._id, firebaseId);
+
+    return await this._model.findById(user._id);
   }
 
   public static async findOne(conditions: any) {
