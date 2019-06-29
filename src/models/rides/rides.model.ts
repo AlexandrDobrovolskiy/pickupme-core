@@ -1,6 +1,6 @@
 import { Model, model } from "mongoose";
 
-import { Ride } from "./ride";
+import { Ride } from "./Ride";
 import { RideSchema } from "./rides.schema";
 
 import { Location } from "../location";

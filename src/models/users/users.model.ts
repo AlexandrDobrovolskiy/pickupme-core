@@ -2,7 +2,7 @@ import { Model, model } from 'mongoose';
 
 import * as jwt from 'jsonwebtoken';
 
-import { User } from './user';
+import { User } from './User';
 import { UserSchema } from './users.schema';
 import { exec } from 'child_process';
 

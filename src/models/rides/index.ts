@@ -1,3 +1,3 @@
-export * from './ride';
+export * from './Ride';
 export * from './rides.model';
 export * from './rides.schema';

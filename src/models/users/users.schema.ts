@@ -1,4 +1,5 @@
 import { Schema } from 'mongoose';
+import { UserSettingsSchema } from 'models/user-settings/user-settings.schema';
 
 const AuthenticationSchema: Schema = new Schema({
   firebase: {
@@ -26,4 +27,8 @@ export const UserSchema: Schema = new Schema({
     type: AuthenticationSchema,
     required: false,
   },
+  settings: {
+    type: UserSettingsSchema,
+    required: false,
+  }
 });

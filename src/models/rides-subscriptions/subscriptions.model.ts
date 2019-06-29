@@ -1,6 +1,6 @@
 import { Model, model } from "mongoose";
 
-import { Subscription } from "./subscription";
+import { Subscription } from "./Subscription";
 import { SearchSubscriptionSchema } from "./subscriptions.schema";
 import { SubscriptionQueries } from './subscriptions-queries';
 
