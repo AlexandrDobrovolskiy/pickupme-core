@@ -1,3 +1,4 @@
+import { resolve } from 'path';
 import { sync } from "glob";
 import { union } from "lodash";
 
@@ -20,6 +21,10 @@ export default class Config {
 	public static models: string = "./dist/models/**/*.js";
 	public static useMongo: boolean = true;
 	public static mongodb = getMongoConnectionString();
+	public static firebase = {
+		database: 'pick-up-me-1542894832304.firebaseapp.com',
+		credentials: resolve('./firebase.json'),
+	}
 	public static globFiles(location: string): string[] {
 		return union([], sync(location));
 	}

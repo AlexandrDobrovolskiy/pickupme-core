@@ -9,5 +9,5 @@ export const loginFromTelegram = [
 
 export const loginFromMobile = [
   checkBody('phone', 'phone is invalid or not provided.').isMobilePhone('uk-UA'),
-  checkBody('uid', 'uid, is invalid or not provided.').isString().isLength({ min: 4 }),
+  checkBody('token', 'token, is invalid or not provided.').isString().isLength({ min: 4 }),
 ];

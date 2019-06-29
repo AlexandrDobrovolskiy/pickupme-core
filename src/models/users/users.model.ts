@@ -4,6 +4,7 @@ import * as jwt from 'jsonwebtoken';
 
 import { User } from './user';
 import { UserSchema } from './users.schema';
+import { exec } from 'child_process';
 
 export class UsersModel {
   private static collectionName: string = 'Users';
@@ -28,7 +29,7 @@ export class UsersModel {
     const user = await UsersModel.create(phone, name, '');
     await UsersModel.assignFirebaseToken(user._id, firebaseId);
 
-    return await this._model.findById(user._id);
+    return (await this._model.findById(user._id).exec()).toJSON();
   }
 
   public static async findOne(conditions: any) {

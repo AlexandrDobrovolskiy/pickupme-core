@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import * as jwt from 'jsonwebtoken';
 
+import FirebaseAdmin from '../services/firebase-admin/FirebaseAdmin';
 import { UsersModel } from '../models/users';
 import { ResponseUtils, createError } from '../utils/response'; 
 
@@ -22,26 +22,31 @@ export default class UsersController {
   }
 
   public loginFromMobile = async (req: Request, res: Response): Promise<void> => {
-    const { phone, uid } = req.body;
+    const { phone, token } = req.body;
+    let auth;
+    
+    try {
+      auth = await FirebaseAdmin.verifyToken(token);
+    } catch (err) {
+      ResponseUtils.json(res, false, createError(
+        401,
+        'Invalid firebase unique id token.',
+        { token: `Expected valid firebase \'token\' for this user, but got ${token}`, uid: auth.uid }
+      ));
+      return;
+    }
+    
     const user = await UsersModel.findOne({ phone });
-
     if (!user) {
       ResponseUtils.json(res, false, createError(
         404,
         'User not found.',
-        { phone: `There are no user with phone '${phone}'.` }
+        { phone: `There are no user with phone '${phone}'.`, uid: auth.uid }
       ));
+      return;
     }
 
-    if (jwt.verify(user.authentication.firebase, 'secret') !== uid) {
-      ResponseUtils.json(res, false, createError(
-        401,
-        'Invalid firebase unique id token.',
-        { uid: `Expected valid firebase \'uid\' for this user, but got ${uid}`}
-      ));
-    }
-
-    ResponseUtils.json(res, true, user);
+    ResponseUtils.json(res, true, user.toJSON());
   }
 
   public registerWithTelegram = async (req: Request, res: Response): Promise<void> => {

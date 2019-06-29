@@ -1,30 +1,38 @@
 import { Express } from "express";
 import { usersController } from "../controllers/users.controller";
 
-import * as validation from '../validation/users';
 import { useValidation } from "../utils/validation/use-validation";
+import * as validation from '../validation/users';
+import * as Routes from './routes';
 
 export default class UsersRoute {
 	constructor(app: Express) {
+		app
+			.route(Routes.Users.REGISTER_APP)
+			.post(
+				useValidation(validation.registerFromMobile),
+				usersController.registerWithMobile,
+			);
 
-    app.route("/v1/users/login/telegram").post(
-			useValidation(validation.loginFromTelegram),
-			usersController.loginWithPhone,
-		);
+		app
+			.route(Routes.Users.REGISTER_TELEGRAM)
+			.post(
+				useValidation(validation.registerFromTelegram),
+				usersController.registerWithTelegram,
+			)
 
-		app.route("v1/users/login/app").post(
-			useValidation(validation.loginFromMobile),
-			usersController.loginFromMobile,
-		);
+		app
+			.route(Routes.Users.LOGIN_TELEGRAM)
+			.post(
+				useValidation(validation.loginFromTelegram),
+				usersController.loginWithPhone,
+			);
 
-		app.route("/v1/users/register/app").post(
-			useValidation(validation.registerFromMobile),
-			usersController.registerWithMobile,
-		);
-
-		app.route("/v1/users/register/telegram").post(
-			useValidation(validation.registerFromTelegram),
-			usersController.registerWithTelegram,
-		)
+		app
+			.route(Routes.Users.LOGIN_APP)
+			.post(
+				useValidation(validation.loginFromMobile),
+				usersController.loginFromMobile,
+			);
 	}
 }

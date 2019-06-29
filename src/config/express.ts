@@ -5,6 +5,7 @@ import * as express from "express";
 import * as logger from "morgan";
 import * as path from "path";
 import * as mongoose from 'mongoose';
+import FirebaseAdmin from "../services/firebase-admin/FirebaseAdmin";
 
 export default function (db) {
     var app: express.Express = express();
@@ -19,6 +20,9 @@ export default function (db) {
             useNewUrlParser: true,
         }).catch(() => { console.log("Error connecting to mongos"); });
     }
+
+    const { database } = config.firebase;
+    FirebaseAdmin.init(database);
 
     app.use(logger("dev"));
     app.use(bodyParser.json());
