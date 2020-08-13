@@ -30,7 +30,9 @@ export default function (db) {
     app.use(cookieParser());
 
     for (let route of config.globFiles(config.routes)) {
-        require(path.resolve(route)).default(app);
+        if (require(path.resolve(route)).default) {
+            require(path.resolve(route)).default(app);
+        }
     }
 
     app.use((req: express.Request, res: express.Response, next: Function): void => {

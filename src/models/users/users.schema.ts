@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import { UserSettingsSchema } from 'models/user-settings/user-settings.schema';
+import { UserSettingsSchema } from '../user-settings/user-settings.schema';
 
 const AuthenticationSchema: Schema = new Schema({
   firebase: {
